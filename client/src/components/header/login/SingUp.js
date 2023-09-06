@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, styled } from "@mui/material";
+
 const Container = styled(Box)`
   margin: 10%;
   text-align: center;
@@ -26,23 +27,33 @@ const StyledButton = styled("button")({
   border: "none",
 });
 const initial = {
+  name: "",
   email: "",
   password: "",
+  cpassword: "",
 };
-const Login = ({ setLoginSignUpHandle }) => {
-  const [login, setLogin] = useState(initial);
+const SignUp = ({ setLoginSignUpHandle }) => {
+  const [signup, setSetSignup] = useState(initial);
   const inputHandler = (e) => {
-    setLogin({ ...login, [e.target.name]: e.target.value });
+    setSetSignup({ ...signup, [e.target.name]: e.target.value });
   };
   const submitHandler = (e) => {
-    console.log(login);
+    console.log(signup);
     e.preventDefault();
   };
   return (
     <Container>
       <InnerContainer>
-        <h3 style={{ color: "white" }}>Login</h3>
+        <h3 style={{ color: "white" }}>SingUp</h3>
         <form onSubmit={submitHandler}>
+          <DivBox>
+            <Input
+              type="text"
+              placeholder="Name"
+              name="name"
+              onChange={inputHandler}
+            />
+          </DivBox>
           <DivBox>
             <Input
               type="email"
@@ -60,16 +71,24 @@ const Login = ({ setLoginSignUpHandle }) => {
             />
           </DivBox>
           <DivBox>
-            <StyledButton>log In</StyledButton>
+            <Input
+              type="password"
+              placeholder="conform password"
+              name="cpassword"
+              onChange={inputHandler}
+            />
+          </DivBox>
+          <DivBox>
+            <StyledButton>signUp</StyledButton>
             <Typography style={{ color: "white" }}>
-              Don't have an account ? Please{" "}
+              you have already account ? Please{" "}
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  setLoginSignUpHandle(false);
+                  setLoginSignUpHandle(true);
                 }}
               >
-                SignUp
+                LogIn
               </span>
             </Typography>
           </DivBox>
@@ -79,4 +98,4 @@ const Login = ({ setLoginSignUpHandle }) => {
   );
 };
 
-export default Login;
+export default SignUp;
